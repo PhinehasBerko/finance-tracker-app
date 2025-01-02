@@ -1,0 +1,28 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/app.ts",
+    "start": "node ./build/app.js",
+    "build": "tsc -p ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.4",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.18.0",
+    "@types/mongoose": "^5.11.96",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.9.3",
+    "prisma": "^5.18.0",
+    "ts-node": "^10.9.2"
+  }
+}
