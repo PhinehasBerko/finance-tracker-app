@@ -1,14 +1,14 @@
-import express from 'express';
+import express, { Application } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-
-import incomeRoutes from './routes/income.routes';
-import expensesRoutes from './routes/expenses.routes';
+import Routers from './routes/financial-records.routes'
+// import incomeRoutes from './routes/income.routes';
+// import expensesRoutes from './routes/expenses.routes';
 import connect  from './services/mongoose';
 
 dotenv.config()
 
-const app = express();
+const app: Application = express();
 
 // connect to mongodb
 connect();
@@ -18,8 +18,9 @@ app.use(express.json());
 app.use(cors())
 
 // routes
-app.use('/api/v1/',incomeRoutes)
-app.use('/api/v1/',expensesRoutes)
+app.use("/api/v1/",Routers)
+// app.use('/api/v1/',incomeRoutes)
+// app.use('/api/v1/',expensesRoutes)
 
 
 

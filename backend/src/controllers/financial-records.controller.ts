@@ -1,7 +1,7 @@
 import FinancialRecordModel from "../schema/financial-record";
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
-const financeByUserId  = async (req: Request, res: Response) => {
+const financeByUserId  = async (req: Request, res: Response, next:NextFunction): Promise<any> => {
     try {
         const userId = req.params.userId;
         const finance = await FinancialRecordModel.find({ userId });
@@ -19,10 +19,11 @@ const financeByUserId  = async (req: Request, res: Response) => {
         } else {
             res.status(500).json({ message: 'An unknown error occurred' });
         }
+        next(error)
     }
 }
 
-const finance = async (req: Request, res: Response) => {
+const finance = async (req: Request, res: Response): Promise<any> => {
     try {
         const finance = new  FinancialRecordModel(req.body);
 
@@ -38,7 +39,7 @@ const finance = async (req: Request, res: Response) => {
     }
 }
 
-const updateFinanceByUserId = async (req: Request, res: Response) => {
+const updateFinanceByUserId = async (req: Request, res: Response): Promise<any> => {
     try {
         const userId = req.params.userId;
         const newRecord = req.body;
@@ -57,7 +58,7 @@ const updateFinanceByUserId = async (req: Request, res: Response) => {
         } 
     }
 
-const deleteFinanceByUserId = async (req: Request, res: Response) => { 
+const deleteFinanceByUserId = async (req: Request, res: Response): Promise<any> => { 
     try {
         const userId = req.params.userId;
         const finance = await FinancialRecordModel.findOneAndDelete({ userId });
@@ -73,4 +74,23 @@ const deleteFinanceByUserId = async (req: Request, res: Response) => {
         }
     }
 }
-export { financeByUserId, finance, updateFinanceByUserId, deleteFinanceByUserId };
+
+const allFinance = async(req:Request, res:Response):Promise<any> =>{
+    try {
+        const response = await FinancialRecordModel.find()
+        if(response){
+            
+            res.status(200).json({response: response})
+           
+        }else{
+            
+            res.status(404).json("Sorry no data was found")
+            
+        }
+        return
+    } catch (error: any) {
+
+        console.log(error.message)
+    }
+}
+export { financeByUserId, finance, updateFinanceByUserId, deleteFinanceByUserId,allFinance };
