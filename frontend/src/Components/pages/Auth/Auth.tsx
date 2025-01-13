@@ -2,10 +2,9 @@ import {
   SignedIn,
   SignedOut,
   SignInButton,
-  SignOutButton,
   SignUpButton,
-  UserButton,
 } from "@clerk/clerk-react";
+import { Navigate } from "react-router-dom";
 
 const Auth = () => {
   return (
@@ -18,8 +17,7 @@ const Auth = () => {
 
       {/* When User is signIn */}
       <SignedIn>
-        <UserButton />
-        <SignOutButton />
+        <Navigate to={"/"}/>
       </SignedIn>
     </div>
   );
