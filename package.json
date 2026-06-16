@@ -1,0 +1,41 @@
+{
+  "name": "finance-tracker-app",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@babel/runtime": "^7.23.5",
+    "@swc/helpers": "^0.5.17",
+    "jquery": "^3.7.1",
+    "meteor-node-stubs": "^1.2.12",
+    "postcss-load-config": "^6.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^6.0.3"
+  },
+  "scripts": {
+    "start": "meteor run"
+  },
+  "meteor": {
+    "mainModule": {
+      "client": "client/main.tsx",
+      "server": "server/main.ts"
+    }
+  },
+  "devDependencies": {
+    "@meteorjs/rspack": "^2.0.1",
+    "@rsdoctor/rspack-plugin": "^1.5.7",
+    "@rspack/cli": "^1.7.1",
+    "@rspack/core": "^1.7.1",
+    "@rspack/plugin-react-refresh": "^1.4.3",
+    "@svgr/webpack": "^8.1.0",
+    "@tailwindcss/postcss": "^4.3.1",
+    "@types/node": "^25.9.3",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.15",
+    "react-refresh": "^0.17.0",
+    "tailwindcss": "^4.3.1"
+  },
+  "modern": true
+}
