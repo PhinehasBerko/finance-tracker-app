@@ -1,0 +1,101 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" style="background: transparent; background-color: transparent;" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="580px" height="416px" viewBox="-0.5 -0.5 580 416" content="&lt;mxfile&gt;&lt;diagram id=&quot;xDnnDpEGNuDrJcbZfUAc&quot; name=&quot;01 - Executive Overview&quot;&gt;3VZdb9sgFP01lraHTHacpemjk6aNNHXV2k5VH4m5iVExMIxjZ79+lw8ncdLuU5Wmvhg4l8uFc+4FR+msbK80UcW1pMCjYUzbKL2IhsMkniTYWGTrkdH5mQfWmtEwaQ/cse/QeQa0ZhSq3kQjJTdM9cFcCgG56WFEa9n0p60k70dVZA0nwF1O+Cn6wKgpPDr5GO/xBbB10UVO4mApSTc5AFVBqGwOoHQepTMtpfG9sp0Bt+R1vHi/yxesu41pEOa3HALxG8LrcLhoOOboOy1wsfHa9jpk2QE3G9AbBg06yhV+FrIEbC6ZICK3vUypzgljL48XQuxwdUeE2XbsGmgtXhktn2AmudSICynQPCWcrQUOczwfID5dMc6P5hSm5DhKsIv7NAx1y4JbySi1YaZNwQzcKZLbmA1mKWJa1oKCJSbebeuQyUCuXRPaAygwewXIgtFbnBKsw0lQuUvzMGz2OZOeBaw4yJc0YCSk6Xq38l5J7AQxXxB2ciJsZkPD0i5s5YlNQQw2TwBupEn+1Ala2lOsnJyM2GXfMZF7kYmg+IVWgajgvXcUFckNk+LtSpkmfSnPn5EyeS0pz1+s0ZUUpsf4+FstO8OgchenlT0ZqdbXX7B3xdf4HDDSxhM5rylqPCalJVEsK9UvWh+uX8uUbY4hyY8Rzo6Rf9555l4HfF5sUmBfg9JQocLEZ6JP5J/krXPGdoB5hwkI1ry0kl/ffL5fREPUJb7IHn3nYT7/5Htfvma39/NbP3icZ7e/4Afh09O/Bh/CSahqu8wKiKk1uLdN49f7DrzIng+bfjs+/GmsnZRYOiYMKDHPpEM8wIIrvQs+w7lmylP+X/CwYJWRrnRdAqha5wWpnLp229WOjWPZKdm6CxLsLVhitOLD3xwJwdP8R7BXJ2/1mjzr35LJ+PSaHI2euSZ3L+Uf3JM43P8nOdvB32Y6/wE=&lt;/diagram&gt;&lt;diagram id=&quot;z-fPY9h6IIpgOsrGF2-a&quot; name=&quot;User Flow&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs/>
+    <g>
+        <g>
+            <rect x="210" y="15" width="370" height="30" fill="none" stroke="none" pointer-events="all"/>
+        </g>
+        <g>
+            <g transform="translate(-0.5 -0.5)">
+                <switch>
+                    <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+                        <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 368px; height: 1px; padding-top: 30px; margin-left: 211px;">
+                            <div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; ">
+                                <div style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;; color: light-dark(#000000, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+                                    <h1>
+                                        <b>
+                                            Overview of Home Finance App
+                                        </b>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </foreignObject>
+                    <text x="395" y="34" fill="light-dark(#000000, #ffffff)" font-family="&quot;Helvetica&quot;" font-size="12px" text-anchor="middle">
+                        Overview of Home Finance App
+                    </text>
+                </switch>
+            </g>
+        </g>
+        <g>
+            <rect x="240" y="65" width="310" height="30" fill="none" stroke="none" pointer-events="all"/>
+        </g>
+        <g>
+            <g transform="translate(-0.5 -0.5)">
+                <switch>
+                    <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+                        <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 308px; height: 1px; padding-top: 80px; margin-left: 241px;">
+                            <div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; ">
+                                <div style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;; color: light-dark(#000000, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+                                    A web app that keep track of my financial (income and expense) transaction
+                                </div>
+                            </div>
+                        </div>
+                    </foreignObject>
+                    <text x="395" y="84" fill="light-dark(#000000, #ffffff)" font-family="&quot;Helvetica&quot;" font-size="12px" text-anchor="middle">
+                        A web app that keep track of my financial (income a...
+                    </text>
+                </switch>
+            </g>
+        </g>
+        <g>
+            <rect x="0" y="135" width="440" height="280" fill="none" stroke="none" pointer-events="all"/>
+        </g>
+        <g>
+            <g transform="translate(-0.5 -0.5)">
+                <switch>
+                    <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+                        <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 438px; height: 1px; padding-top: 275px; margin-left: 1px;">
+                            <div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; ">
+                                <div style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;; color: light-dark(#000000, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+                                    <font style="font-size: 14px;">
+                                        what to include
+                                    </font>
+                                    <div>
+                                        <ol>
+                                            <li>
+                                                <font style="font-size: 14px;">
+                                                    A graphical representation of (income and expense) graph -filtered by MONTH, DAY, WEEK, QUARTER, YEAR
+                                                </font>
+                                            </li>
+                                            <li>
+                                                <font style="font-size: 14px;">
+                                                    An input feature for : - income / expense, - amount - date  -item, description
+                                                </font>
+                                            </li>
+                                            <li>
+                                                <font style="font-size: 14px;">
+                                                    History of purchased items : filtered by day week month.
+                                                </font>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </foreignObject>
+                    <text x="220" y="279" fill="light-dark(#000000, #ffffff)" font-family="&quot;Helvetica&quot;" font-size="12px" text-anchor="middle">
+                        what to include...
+                    </text>
+                </switch>
+            </g>
+        </g>
+    </g>
+    <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
+        <a transform="translate(0,-5)" xlink:href="https://www.drawio.com/doc/faq/svg-export-text-problems" target="_blank">
+            <text text-anchor="middle" font-size="10px" x="50%" y="100%">
+                Text is not SVG - cannot display
+            </text>
+        </a>
+    </switch>
+</svg>
