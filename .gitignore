@@ -13,3 +13,4 @@ _build
 # Meteor local data
 .meteor/local/
 
+.DS_Store

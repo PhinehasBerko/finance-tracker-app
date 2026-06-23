@@ -24,3 +24,4 @@ react-meteor-data       # React higher-order component for reactively tracking M
 rspack@1.1.0                  # Integrate Rspack into Meteor for client and server app bundling
 
 zodern:types            # Pull in type declarations from other Meteor packages
+aldeed:collection2

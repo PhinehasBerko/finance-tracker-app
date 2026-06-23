@@ -1,0 +1,7 @@
+"@clerk/clerk-react": "^5.21.0",
+    "axios": "^1.7.5",
+    "chart.js": "^4.4.4",
+    "moment": "^2.30.1",
+    "react": "^18.3.1",
+    "react-chartjs-2": "^5.2.0",
+    "react-datepicker": "^7.3.0",
