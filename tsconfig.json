@@ -19,6 +19,7 @@
     "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": false,
     "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "paths": {
       "/*": [
         "*"
@@ -26,11 +27,12 @@
     },
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "types": ["node"],
+    "types": ["node","meteor-mdg-validated-method",],
     "esModuleInterop": true,
     "preserveSymlinks": true
   },"include":[
     "**/*.ts",
+    "**/*.d.ts",
     "**/*.tsx",
     ".meteor/local/types/packages.d.ts"
   ],

@@ -30,6 +30,7 @@
     "@rspack/plugin-react-refresh": "^1.4.3",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4.3.1",
+    "@types/meteor-mdg-validated-method": "^1.2.12",
     "@types/node": "^25.9.3",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",

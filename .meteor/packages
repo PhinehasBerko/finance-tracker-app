@@ -25,3 +25,4 @@ rspack@1.1.0                  # Integrate Rspack into Meteor for client and serv
 
 zodern:types            # Pull in type declarations from other Meteor packages
 aldeed:collection2
+mdg:validated-method
