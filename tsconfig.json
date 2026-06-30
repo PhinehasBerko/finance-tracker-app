@@ -34,6 +34,7 @@
     "**/*.ts",
     "**/*.d.ts",
     "**/*.tsx",
+    "**/*.css",
     ".meteor/local/types/packages.d.ts"
   ],
   "exclude": [

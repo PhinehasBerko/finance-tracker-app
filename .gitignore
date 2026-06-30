@@ -14,3 +14,6 @@ _build
 .meteor/local/
 
 .DS_Store
+
+# folder-files
+Docs/finance_app_user_flow.drawio   
