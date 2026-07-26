@@ -13,6 +13,7 @@ _build
 # Meteor local data
 .meteor/local/
 
+settings.json
 .DS_Store
 
 # folder-files
