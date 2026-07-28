@@ -5,12 +5,13 @@ import { insertIncome } from '/imports/api/income/methods';
 type Source = 'salary' | 'parent' | 'freelance' | 'gift' | 'other';
 
 interface FormState {
+  idempotencyKey: string,
   amount: string;       // string so the input stays controlled without NaN on empty
   source: Source | '';
-  note: string;
+  description: string;
   date: string;         // HTML date inputs always work with "YYYY-MM-DD" strings
-  accountId: string;
-  isRecurring: boolean;
+  account_id: string;
+  is_recurring: boolean;
 }
 
 interface FormErrors {
@@ -21,11 +22,11 @@ interface FormErrors {
 
 // Constants 
 const SOURCES: { value: Source; label: string; icon: string }[] = [
-  { value: 'salary',   label: 'Salary',    icon: '💼' },
-  { value: 'parent',   label: 'Parent',    icon: '👨‍👩‍👧' },
-  { value: 'freelance',label: 'Freelance', icon: '🛠️' },
-  { value: 'gift',     label: 'Gift',      icon: '🎁' },
-  { value: 'other',    label: 'Other',     icon: '•••' },
+  { value: 'salary', label: 'Salary', icon: '💼' },
+  { value: 'parent', label: 'Parent', icon: '👨‍👩‍👧' },
+  { value: 'freelance', label: 'Freelance', icon: '🛠️' },
+  { value: 'gift', label: 'Gift', icon: '🎁' },
+  { value: 'other', label: 'Other', icon: '•••' },
 ];
 
 const today = (): string => new Date().toISOString().split('T')[0];
@@ -56,19 +57,21 @@ interface IncomeProps {
   onSuccess?: (newId: string) => void;  // e.g. navigate back to dashboard
   onCancel?: () => void;
 }
+const idempotencyKey = crypto.randomUUID();
 
 const Income = ({ onSuccess, onCancel }: IncomeProps) => {
 
   const [form, setForm] = useState<FormState>({
+    idempotencyKey: '',
     amount: '',
     source: '',
-    note: '',
+    description: '',
     date: today(),
-    accountId: 'main_wallet',
-    isRecurring: false,
+    account_id: 'main_wallet',
+    is_recurring: false,
   });
 
-  const [errors, setErrors]   = useState<FormErrors>({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -83,7 +86,7 @@ const Income = ({ onSuccess, onCancel }: IncomeProps) => {
   };
 
   // Submit
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setServerError(null);
 
@@ -94,20 +97,25 @@ const Income = ({ onSuccess, onCancel }: IncomeProps) => {
     }
 
     setLoading(true);
+    
     try {
-      const newId = await insertIncome.call({
-        amount:      parseFloat(form.amount),
-        source:      form.source as Source,
-        note:        form.note.trim() || undefined,
-        date:        new Date(form.date),   // convert string → Date for the method
-        accountId:   form.accountId,
-        isRecurring: form.isRecurring,
+      const newId = await insertIncome.callAsync({
+        idempotencyKey,
+        amount: parseFloat(form.amount),
+        source: form.source as Source,
+        description: form.description.trim() || undefined,
+        date: new Date(form.date),   // convert string → Date for the method
+        account_id: form.account_id,
+        is_recurring: form.is_recurring,
       });
 
-      onSuccess?.(newId as string);
+      onSuccess?.(newId as any);
     } catch (err: any) {
-      
-      setServerError(err?.reason ?? err?.message ?? 'Something went wrong. Please try again.');
+        console.log('Full error:', err);          // add this line
+        console.log('Error reason:', err?.reason);
+        console.log('Error message:', err?.message);
+        console.log('Error error:', err?.error);
+        setServerError(err?.reason ?? err?.message ?? 'Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -225,17 +233,17 @@ const Income = ({ onSuccess, onCancel }: IncomeProps) => {
           Details
         </legend>
 
-        {/* Note */}
+        {/* description */}
         <div className="flex flex-col gap-1">
-          <label htmlFor="note" className="text-xs text-gray-400">
-            Note <span className="text-gray-600">(optional)</span>
+          <label htmlFor="description" className="text-xs text-gray-400">
+            Description <span className="text-gray-600">(optional)</span>
           </label>
           <input
             type="text"
-            id="note"
+            id="description"
             placeholder="e.g. June salary — ABC Ltd"
-            value={form.note}
-            onChange={e => setField('note', e.target.value)}
+            value={form.description}
+            onChange={e => setField('description', e.target.value)}
             className="
               bg-transparent border border-gray-600 rounded-xl px-3 py-2
               text-sm text-white placeholder-gray-600
@@ -275,8 +283,8 @@ const Income = ({ onSuccess, onCancel }: IncomeProps) => {
           </label>
           <select
             id="account"
-            value={form.accountId}
-            onChange={e => setField('accountId', e.target.value)}
+            value={form.account_id}
+            onChange={e => setField('account_id', e.target.value)}
             className="
               bg-gray-800 border border-gray-600 rounded-xl px-3 py-2
               text-sm text-white
@@ -293,8 +301,8 @@ const Income = ({ onSuccess, onCancel }: IncomeProps) => {
           <input
             type="checkbox"
             id="recurring_monthly"
-            checked={form.isRecurring}
-            onChange={e => setField('isRecurring', e.target.checked)}
+            checked={form.is_recurring}
+            onChange={e => setField('is_recurring', e.target.checked)}
             className="h-4 w-4 accent-blue-500"
           />
           <span className="text-sm text-gray-300">Recurring monthly</span>
