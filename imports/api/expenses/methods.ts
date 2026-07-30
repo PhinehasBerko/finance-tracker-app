@@ -18,7 +18,7 @@ const insertSchema  = new SimpleSchema({
         idempotencyKey: { type: String  },
         items: { type: Array, minCount: 1 },
         'items.$' : { type: baseItemSchema }
-    });
+});
 
 const updatableFields = new SimpleSchema({     
         itemName: { type: String, optional: true },
@@ -52,13 +52,16 @@ export const InsertExpenses = new ValidatedMethod({
         if (expense) {
             return { success: true, receiptId: expense.receiptId, replayed: true };
         }
+
         const receiptId = Random.id();
         const now = new Date();
+
         const docs = items.map((item: any) => ({
             _id: Random.id(),
             userId: this.userId,
             receiptId,
             shoppingListItemId: item.shoppingListItemId || null,
+            idempotencyKey,
             itemName: item.itemName,
             quantity: item.quantity,
             unitPrice: item.unitPrice,
@@ -69,26 +72,37 @@ export const InsertExpenses = new ValidatedMethod({
             updatedAt: now,
         }));
 
-        const client = MongoInternals.defaultRemoteCollectionDriver().mongo.client;
-        const session = client.startSession();
-        try {
-            await session.withTransaction( async () => {
-                const rawCollection = ExpensesCollection.rawCollection();
-                await rawCollection.insertMany(docs, { session } as any);
-            })
-        } finally {
-            await session.endSession();
+        if (Meteor.isServer){
+
+            const client = MongoInternals.defaultRemoteCollectionDriver().mongo.client;
+            const session = client.startSession();
+            try {
+                await session.withTransaction( async () => {
+                    const rawCollection = ExpensesCollection.rawCollection();
+                    await rawCollection.insertMany(docs, { session } as any);
+                })
+            } finally {
+                await session.endSession();
+            }
+        } else {
+            for (const doc of docs) {
+                await ExpensesCollection.insertAsync(doc);
+            }
         }
+        
         return { success: true, receiptId, replayed: false }
     }
 });
 
-DDPRateLimiter.addRule(
-    { type: 'method', name: 'expenses.insert', userId: () => true },
-    5,
-    10_000
-)
-export const updateExpenses = new ValidatedMethod({
+if (Meteor.isServer) {  
+    DDPRateLimiter.addRule(
+        { type: 'method', name: 'expenses.insert', userId: () => true },
+        5,
+        10_000
+    )
+}
+
+    export const updateExpenses = new ValidatedMethod({
     name: "expenses.update",
     validate: updateSchema.validator(),
     async run({ expenseId, expectedUpdatedAt, changes }) {
@@ -129,11 +143,13 @@ export const updateExpenses = new ValidatedMethod({
     }
 });
 
-DDPRateLimiter.addRule(
-  { type: "method", name: "expenses.update", userId: () => true },
-  10,
-  10_000
-);
+if (Meteor.isServer) {
+    DDPRateLimiter.addRule(
+      { type: "method", name: "expenses.update", userId: () => true },
+      10,
+      10_000
+    );
+}
 
 export const removeExpenses = new ValidatedMethod({
     name: "expenses.remove",
@@ -159,9 +175,11 @@ export const removeExpenses = new ValidatedMethod({
     return { success: true, alreadyRemoved: false };
    }
 });
-
-DDPRateLimiter.addRule(
-  { type: "method", name: "expenses.remove", userId: () => true },
-  10,
-  10_000
-);
+ 
+if (Meteor.isServer) {
+    DDPRateLimiter.addRule(
+      { type: "method", name: "expenses.remove", userId: () => true },
+      10,
+      10_000
+    );
+}

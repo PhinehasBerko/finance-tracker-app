@@ -1,9 +1,28 @@
 import { Mongo } from "meteor/mongo";
 import SimpleSchema from "simpl-schema";
 import { MeteorIdRegEx } from "../income/Incomes";
-import "meteor/aldeed:collection2"; // This package is required for schema validation to work with Mongo.Collection
 
-export const ExpensesCollection = new Mongo.Collection("expenses");
+// This package is required for schema validation to work with Mongo.Collection
+import "meteor/aldeed:collection2/dynamic"; 
+
+await Collection2.load();
+
+export interface ExpensesDoc {
+    _id?: string, 
+    userId: string,
+    receiptId: string,
+    shoppingListItemId?: string,
+    idempotencyKey: string,
+    itemName: string,
+    quantity: number,
+    totalPrice?: number,
+    unitPrice: number,
+    cateory: string,
+    updatedAt: Date,
+    createdAt: Date,
+    deletedAt: Date | null,
+}
+export const ExpensesCollection = new Mongo.Collection<ExpensesDoc>("expenses");
 
 export const expensesSchema = new SimpleSchema({
     userId: {
@@ -19,10 +38,14 @@ export const expensesSchema = new SimpleSchema({
         regEx: MeteorIdRegEx,
         optional: true
     },
+    idempotencyKey: {
+        type: String,
+        optional: true
+    },
     itemName: {
         type: String
     },
-    price: {
+    unitPrice: {
         type: Number,
         min: 0.01,
     },
