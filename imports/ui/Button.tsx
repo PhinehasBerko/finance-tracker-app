@@ -1,4 +1,5 @@
-import React from "react";
+import React, { ComponentPropsWithoutRef } from "react";
+import { cn } from "../lib/utils";
 
 export type ButtonTypes = 
     "displayToggle" 
@@ -18,24 +19,41 @@ const CONFIG: Record<ButtonTypes, {label: string; cls: string}> = {
 
 }
 
-interface ButtonProps {
-    kind: ButtonTypes;
-    onClick: () => void;
-    pressed?: boolean;
+interface ButtonProps extends Omit<ComponentPropsWithoutRef<"button">,"children">{
+    kind: ButtonTypes;   
+    isLoading?: boolean
 }
-const Button = ({kind, onClick, pressed}: ButtonProps) => {
-    
-    return (
+
+const Button = ({kind, type,  isLoading, ...rest}: ButtonProps) =>  (
         <button 
-            type="button"
-            onClick={onClick}
-            aria-pressed={pressed}
-            className = {` rounded-xl px-4 py-2 font-semibold ${CONFIG[kind].cls}
-                        ${pressed ? "ring-2 ring-offset-2 ring-gray-900":""}`}
-            >
-             {CONFIG[kind].label}
+            type= {type}
+            disabled= {isLoading || rest.disabled}
+            className ={cn(
+                "rounded-xl px-4 py-2 font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-900 disabled:cursor-not-allowed disabled:opacity-50",
+                CONFIG[kind].cls,
+                {"animate-pulse cursor-wait": isLoading}
+            )}
+            {...rest}
+        >  
+            {isLoading && (
+            <>
+              <svg
+                className="animate-spin h-4 w-4 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+              </svg>
+              Saving…
+            </>
+          ) }
+        {CONFIG[kind].label}
+             
         </button>
     )
-}
+
 
 export default Button;
