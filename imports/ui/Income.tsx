@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { insertIncome } from '/imports/api/income/methods';
+import Button from './Button';
 
-// type and interfaces
 type Source = 'salary' | 'parent' | 'freelance' | 'gift' | 'other';
 
 interface FormState {
@@ -19,8 +19,7 @@ interface FormErrors {
   source?: string;
   date?: string;
 }
-
-// Constants 
+ 
 const SOURCES: { value: Source; label: string; icon: string }[] = [
   { value: 'salary', label: 'Salary', icon: '💼' },
   { value: 'parent', label: 'Parent', icon: '👨‍👩‍👧' },
@@ -76,7 +75,6 @@ const Income = ({ onSuccess, onCancel }: IncomeProps) => {
   const [serverError, setServerError] = useState<string | null>(null);
 
   // Field helpers 
-
   const setField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm(prev => ({ ...prev, [key]: value }));
     // Clear the specific error as soon as the user corrects the field
@@ -112,9 +110,6 @@ const Income = ({ onSuccess, onCancel }: IncomeProps) => {
       onSuccess?.(newId as any);
     } catch (err: any) {
         console.log('Full error:', err);          // add this line
-        console.log('Error reason:', err?.reason);
-        console.log('Error message:', err?.message);
-        console.log('Error error:', err?.error);
         setServerError(err?.reason ?? err?.message ?? 'Something went wrong. Please try again.');
     } finally {
       setLoading(false);
@@ -128,28 +123,10 @@ const Income = ({ onSuccess, onCancel }: IncomeProps) => {
       onSubmit={handleSubmit}
       noValidate     // disable browser built-in popups; we handle our own
       aria-label="Add income"
-      className="
-        bg-gray-900 border border-gray-700 rounded-2xl
-        p-6 sm:p-8
-        mx-auto w-full max-w-xl
-        flex flex-col gap-6
-        text-gray-100
-      "
+      className="mx-auto w-full max-w-fit border border-gray-300 rounded-xl p-6 
+        flex flex-col gap-2 text-gray-100"
     >
-      {/* ── Header ── */}
-      <div className="flex items-center justify-between">
-        <h1 className="font-bold text-lg sm:text-2xl">Add income</h1>
-        {onCancel && (
-          <button
-            type="button"
-            onClick={onCancel}
-            aria-label="Close"
-            className="text-gray-400 hover:text-gray-100 transition-colors text-xl leading-none"
-          >
-            ✕
-          </button>
-        )}
-      </div>
+      <h1 className="font-bold text-xl text-black">Add income</h1>
 
       {/* ── Amount ── */}
       <fieldset className="flex flex-col gap-1">
@@ -159,12 +136,12 @@ const Income = ({ onSuccess, onCancel }: IncomeProps) => {
         <div className={`
           flex items-baseline gap-2 border rounded-xl px-4 py-3
           focus-within:border-blue-500 transition-colors
-          ${errors.amount ? 'border-red-500' : 'border-gray-600'}
+          ${errors.amount ? 'border-red-500' : 'border-gray-300'}
         `}>
-          <span className="text-gray-400 text-base font-medium">GHS</span>
+          <span className="text-gray-600 text-base font-medium">GHS</span>
           <input
             type="text"
-            inputMode="decimal"
+            inputMode="numeric"
             id="amount"
             required
             placeholder="0.00"
@@ -174,7 +151,7 @@ const Income = ({ onSuccess, onCancel }: IncomeProps) => {
             aria-invalid={!!errors.amount}
             className="
               flex-1 bg-transparent border-none outline-none
-              font-bold text-2xl sm:text-4xl text-white placeholder-gray-600
+              font-bold text-xl sm:text-2xl text-gray-600 placeholder-gray-300
             "
           />
         </div>
@@ -198,15 +175,12 @@ const Income = ({ onSuccess, onCancel }: IncomeProps) => {
                 flex items-center gap-2 p-3 rounded-xl border cursor-pointer
                 text-sm font-medium transition-colors select-none
                 ${form.source === value
-                  ? 'border-blue-500 bg-blue-950 text-blue-300'
-                  : 'border-gray-600 hover:border-gray-400 text-gray-300'
+                  ? 'border-gray-500 bg-gray-400 text-gray-50'
+                  : 'border-gray-300 hover:bg-gray-300 text-gray-600'
                 }
               `}
             >
-              {/*
-                Hide the native radio visually but keep it for
-                keyboard nav and screen readers
-              */}
+            
               <input
                 type="radio"
                 name="source"
@@ -245,9 +219,9 @@ const Income = ({ onSuccess, onCancel }: IncomeProps) => {
             value={form.description}
             onChange={e => setField('description', e.target.value)}
             className="
-              bg-transparent border border-gray-600 rounded-xl px-3 py-2
-              text-sm text-white placeholder-gray-600
-              focus:outline-none focus:border-blue-500 transition-colors
+              bg-transparent border border-gray-300 rounded-xl px-3 py-2
+              text-sm text-gray-600 placeholder-gray-400
+              focus:outline-none focus:border-gray-500 transition-colors
             "
           />
         </div>
@@ -263,9 +237,9 @@ const Income = ({ onSuccess, onCancel }: IncomeProps) => {
             aria-describedby={errors.date ? 'date-error' : undefined}
             aria-invalid={!!errors.date}
             className="
-              bg-transparent border border-gray-600 rounded-xl px-3 py-2
-              text-sm text-white
-              focus:outline-none focus:border-blue-500 transition-colors
+              bg-transparent border border-gray-300 rounded-xl px-3 py-2
+              text-sm text-gray-600
+              focus:outline-none focus:border-gray-500 transition-colors
               [color-scheme:schema-dark]
             "
           />
@@ -286,12 +260,15 @@ const Income = ({ onSuccess, onCancel }: IncomeProps) => {
             value={form.account_id}
             onChange={e => setField('account_id', e.target.value)}
             className="
-              bg-gray-800 border border-gray-600 rounded-xl px-3 py-2
-              text-sm text-white
-              focus:outline-none focus:border-blue-500 transition-colors
+              bg-gray-400 border border-gray-300 rounded-xl px-3 py-2
+              text-sm text-white font-bold
+              focus:outline-none focus:border-gray-500 transition-colors
             "
           >
-            <option value="main_wallet">Main wallet</option>
+            <option value="bank_accont">Bank Account</option>
+            <option value="mtn-momo">Mtn Momo</option>
+            <option value="telecel-cash">Telecel Cash</option>
+            
             {/* Future: map over user's real accounts from a subscription */}
           </select>
         </div>
@@ -303,9 +280,9 @@ const Income = ({ onSuccess, onCancel }: IncomeProps) => {
             id="recurring_monthly"
             checked={form.is_recurring}
             onChange={e => setField('is_recurring', e.target.checked)}
-            className="h-4 w-4 accent-blue-500"
+            className="h-6 w-6 accent-gray-400"
           />
-          <span className="text-sm text-gray-300">Recurring monthly</span>
+          <span className="text-sm text-gray-600">Recurring monthly</span>
         </label>
       </fieldset>
 
@@ -333,36 +310,11 @@ const Income = ({ onSuccess, onCancel }: IncomeProps) => {
             Cancel
           </button>
         )}
-        <button
-          type="submit"
-          disabled={loading}
-          className="
-            flex-1 py-3 rounded-xl
-            bg-blue-600 hover:bg-blue-500 active:bg-blue-700
-            text-white font-semibold text-sm
-            transition-colors
-            disabled:opacity-50 disabled:cursor-not-allowed
-            flex items-center justify-center gap-2
-          "
-        >
-          {loading ? (
-            <>
-              <svg
-                className="animate-spin h-4 w-4 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
-              </svg>
-              Saving…
-            </>
-          ) : (
-            'Save income'
-          )}
-        </button>
+        <Button
+          kind='saveIncome'
+          type='submit'
+          disabled = {loading}
+        />
       </div>
     </form>
   );
